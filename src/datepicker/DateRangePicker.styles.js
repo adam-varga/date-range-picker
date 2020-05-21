@@ -1,6 +1,8 @@
+import React from "react";
 import styled, { css } from "styled-components";
+import Icon from "../common/icon/Icon";
 
-export const DateRangePicker = styled.div`
+export const Container = styled.div`
   display: block;
   background: #141414;
   padding: 20px;
@@ -16,6 +18,7 @@ export const Header = styled.div`
 export const SelectedRange = styled.h1`
   color: white;
   font-size: 24px;
+  font-weight: normal;
   margin: 0;
 `;
 
@@ -24,7 +27,9 @@ export const FiltersContainer = styled.div`
   align-items: center;
 `;
 
-export const Filter = styled.a`
+const filterLinkHeight = 15;
+
+const FilterLink = styled.a`
   color: #a1a1a1;
   font-size: 10px;
   text-transform: uppercase;
@@ -33,9 +38,16 @@ export const Filter = styled.a`
   text-decoration: none;
   border-bottom: 1px solid transparent;
   margin: 0 10px;
-  padding: 5px 0;
+  padding: 4px 0;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
+  display: inline-flex;
+  align-items: center;
+  height: ${filterLinkHeight}px;
+
+  span {
+    display: inline-block;
+  }
 
   &:hover {
     color: white;
@@ -53,3 +65,21 @@ export const Filter = styled.a`
       }
     `}
 `;
+
+const FilterIconContainer = styled.div`
+  margin-right: 5px;
+  display: inline-block;
+  position: relative;
+  top: 2px;
+`;
+
+export const Filter = (props) => (
+  <FilterLink {...props}>
+    {props.icon && (
+      <FilterIconContainer>
+        <Icon size={filterLinkHeight} icon={props.icon} />
+      </FilterIconContainer>
+    )}
+    <span>{props.children}</span>
+  </FilterLink>
+);
